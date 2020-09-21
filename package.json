@@ -9,6 +9,7 @@
     "dev": "ts-node-dev --watch *.ts,*.graphql --respawn --transpile-only src/index.ts",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "test": "jest",
+    "test-all": "yarn lint && yarn type-check && yarn test --ci --coverage",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "type-check": "tsc --pretty --noEmit"
