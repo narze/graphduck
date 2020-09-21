@@ -1,4 +1,7 @@
+import "reflect-metadata";
 const { ApolloServer, gql } = require("apollo-server");
+import { createConnection } from "typeorm";
+import { User } from "./entity/User";
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -39,11 +42,20 @@ const resolvers = {
   },
 };
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
-const server = new ApolloServer({ typeDefs, resolvers });
+const main = async () => {
+  const conn = await createConnection();
+  await conn.runMigrations();
 
-// The `listen` method launches a web server.
-server.listen().then(({ url }: { url: string }) => {
-  console.log(`🚀  Server ready at ${url}`);
+  // The ApolloServer constructor requires two parameters: your schema
+  // definition and your set of resolvers.
+  const server = new ApolloServer({ typeDefs, resolvers });
+
+  // The `listen` method launches a web server.
+  server.listen().then(({ url }: { url: string }) => {
+    console.log(`🚀  Server ready at ${url}`);
+  });
+};
+
+main().catch((err) => {
+  console.error(err);
 });
