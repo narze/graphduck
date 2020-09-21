@@ -1,16 +1,22 @@
 import "reflect-metadata";
 const { ApolloServer, gql } = require("apollo-server");
-import { createConnection } from "typeorm";
+import { createConnection, getConnectionOptions } from "typeorm";
 import { User } from "./entity/User";
 import { buildSchema } from "type-graphql";
 import { HelloResolver } from "./resolvers/hello";
+import { UserResolver } from "./resolvers/User";
 
 const main = async () => {
-  const conn = await createConnection();
+  const defaultConnectionOptions = await getConnectionOptions();
+
+  const conn = await createConnection({
+    ...defaultConnectionOptions,
+    entities: [User],
+  });
   await conn.runMigrations();
 
   const schema = await buildSchema({
-    resolvers: [HelloResolver],
+    resolvers: [HelloResolver, UserResolver],
   });
 
   const server = new ApolloServer({ schema });
