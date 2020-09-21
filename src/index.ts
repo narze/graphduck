@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-const { ApolloServer } = require('apollo-server')
+import { ApolloServer } from 'apollo-server'
 import { createConnection, getConnectionOptions } from 'typeorm'
 import { User } from './entity/User'
 import { buildSchema } from 'type-graphql'
@@ -24,6 +24,7 @@ const main = async () => {
 
   // The `listen` method launches a web server.
   server.listen().then(({ url }: { url: string }) => {
+    // eslint-disable-next-line no-console
     console.log(`🚀  Server ready at ${url}`)
   })
 }
