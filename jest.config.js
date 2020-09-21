@@ -4,4 +4,7 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>[/\\\\](node_modules|dist|.history)[/\\\\]',
   ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>[/\\\\](node_modules|src/migration)[/\\\\]'
+  ],
 }
