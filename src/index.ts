@@ -1,5 +1,5 @@
 import "reflect-metadata";
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer } = require("apollo-server");
 import { createConnection, getConnectionOptions } from "typeorm";
 import { User } from "./entity/User";
 import { buildSchema } from "type-graphql";
@@ -13,7 +13,8 @@ const main = async () => {
     ...defaultConnectionOptions,
     entities: [User],
   });
-  await conn.runMigrations();
+
+  // await conn.synchronize();
 
   const schema = await buildSchema({
     resolvers: [HelloResolver, UserResolver],
