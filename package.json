@@ -6,13 +6,14 @@
   "author": "Manassarn Manoonchai <manassarn@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --watch \"**/*.ts\" --respawn --transpile-only src/index.ts",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "test": "jest",
     "test-all": "yarn lint && yarn type-check && yarn test --ci --coverage",
     "lint": "eslint . --ext ts --ext tsx --ext js",
-    "format": "prettier --write \"**/*.{js,ts,tsx}\"",
+    "format": "prettier --write \"**/*.{js,ts}\"",
     "type-check": "tsc --pretty --noEmit",
+    "migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate",
     "db:seed": "NODE_ENV=development ts-node scripts/seed.ts"
   },
   "husky": {
