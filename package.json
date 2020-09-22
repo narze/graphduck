@@ -6,7 +6,7 @@
   "author": "Manassarn Manoonchai <manassarn@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --watch *.ts,*.graphql --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/index.ts",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "test": "jest",
     "test-all": "yarn lint && yarn type-check && yarn test --ci --coverage",

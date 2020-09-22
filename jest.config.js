@@ -5,6 +5,6 @@ module.exports = {
     '<rootDir>[/\\\\](node_modules|dist|.history)[/\\\\]',
   ],
   coveragePathIgnorePatterns: [
-    '<rootDir>[/\\\\](node_modules|src/migration)[/\\\\]'
+    '<rootDir>[/\\\\](node_modules|src/migration)[/\\\\]',
   ],
 }
