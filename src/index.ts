@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { createConnection, getConnectionOptions } from 'typeorm'
-import { User } from './entities/User'
+import { User } from './entities/user'
 import { buildSchema } from 'type-graphql'
 import { HelloResolver } from './resolvers/hello'
-import { UserResolver } from './resolvers/User'
+import { UserResolver } from './resolvers/user'
 
 const main = async () => {
   const defaultConnectionOptions = await getConnectionOptions()
