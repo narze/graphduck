@@ -39,9 +39,21 @@ const GET_USERS = gql`
   }
 `
 
+const GET_USER_WITH_ID = gql`
+  query($id: Int!) {
+    user(id: $id) {
+      id
+      age
+      firstName
+      lastName
+    }
+  }
+`
+
 const CREATE_USER = gql`
   mutation {
-    createUser(age: 20, firstName: "Foo", lastName: "Bar") {
+    createUser(firstName: "Foo", lastName: "Bar") {
+      id
       age
       firstName
       lastName
@@ -64,7 +76,7 @@ it('fetches single launch', async () => {
     throw new Error('mutation error')
   }
 
-  expect(mutateRes.data.createUser.age).toBe(20)
+  expect(mutateRes.data.createUser.age).toBe(null)
   expect(mutateRes.data.createUser.firstName).toBe('Foo')
   expect(mutateRes.data.createUser.lastName).toBe('Bar')
   // expect(mutateRes.data).toMatchInlineSnapshot();
@@ -72,12 +84,22 @@ it('fetches single launch', async () => {
   const queryRes = await query({ query: GET_USERS })
 
   if (!queryRes.data) {
-    throw new Error('mutation error')
+    throw new Error('query error')
   }
 
   expect(queryRes.data.users).toBeInstanceOf(Array)
   expect(queryRes.data.users.length).toBe(1)
   // expect(queryRes.data).toMatchInlineSnapshot();
+
+  const getUserRes = await query({
+    query: GET_USER_WITH_ID,
+    variables: { id: +mutateRes.data.createUser.id },
+  })
+
+  if (!getUserRes.data) {
+    console.error(getUserRes)
+    throw new Error('query error')
+  }
 
   await stop()
 })
