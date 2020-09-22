@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 const path = require('path')
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
