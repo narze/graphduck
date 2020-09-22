@@ -1,6 +1,8 @@
 # Graphduck
 
-GraphQL server made with Apollo Server 2, TypeORM, TypeGraphQL, and more.
+[![codecov](https://codecov.io/gh/narze/graphduck/branch/main/graph/badge.svg)](https://codecov.io/gh/narze/graphduck)
+
+GraphQL server stack made with Apollo Server 2, TypeORM, TypeGraphQL, and more.
 
 ## Setup
 
