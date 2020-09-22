@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Arg, Int } from 'type-graphql'
 import { User } from '../entities/user'
 
-@Resolver(() => User)
+@Resolver()
 export class UserResolver {
   @Query(() => [User])
   users(): Promise<User[]> {
