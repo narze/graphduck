@@ -5,15 +5,15 @@ const NODE_ENV = process.env.NODE_ENV || 'development'
 
 const DEFAULTS = {
   type: 'postgres',
-  entities: [path.join(__dirname, 'src/entity/**/*.ts')],
-  migrations: [path.join(__dirname, 'src/migration/**/*.ts')],
+  entities: [path.join(__dirname, 'src/entities/**/*.ts')],
+  migrations: [path.join(__dirname, 'src/migrations/**/*.ts')],
   subscribers: [path.join(__dirname, 'src/subscriber/**/*.ts')],
   synchronize: false,
   logging: false,
   cli: {
-    entitiesDir: 'src/entity',
-    migrationsDir: 'src/migration',
-    subscribersDir: 'src/subscriber',
+    entitiesDir: 'src/entities',
+    migrationsDir: 'src/migrations',
+    subscribersDir: 'src/subscribers',
   },
 }
 

@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { createConnection, getConnectionOptions } from 'typeorm'
-import { User } from './entity/User'
+import { User } from './entities/User'
 import { buildSchema } from 'type-graphql'
 import { HelloResolver } from './resolvers/hello'
 import { UserResolver } from './resolvers/User'

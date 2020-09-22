@@ -1,6 +1,6 @@
 import { createTestClient } from 'apollo-server-testing'
 import { ApolloServer, gql } from 'apollo-server'
-import { User } from '../../entity/User'
+import { User } from '../../entities/User'
 import { getConnectionOptions, createConnection } from 'typeorm'
 import { buildSchema } from 'type-graphql'
 import { UserResolver } from '../User'
