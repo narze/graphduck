@@ -12,7 +12,8 @@
     "test-all": "yarn lint && yarn type-check && yarn test --ci --coverage",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
-    "type-check": "tsc --pretty --noEmit"
+    "type-check": "tsc --pretty --noEmit",
+    "db:seed": "NODE_ENV=development ts-node scripts/seed.ts"
   },
   "husky": {
     "hooks": {
