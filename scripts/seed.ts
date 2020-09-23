@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 
 import { createConnection } from 'typeorm'
-import { User } from '../src/entities/user'
+import { User } from '@/entities/user'
 
 const seed = async () => {
   const connection = await createConnection()

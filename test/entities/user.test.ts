@@ -1,5 +1,5 @@
-import { User } from '../../src/entities/user'
-import { Book } from '../../src/entities/book'
+import { User } from '@/entities/user'
+import { Book } from '@/entities/book'
 import { getConnectionOptions, createConnection } from 'typeorm'
 
 // TODO: Refactor initDb

@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const { pathsToModuleNameMapper } = require('ts-jest/utils')
+const { compilerOptions } = require('./tsconfig')
+
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -7,6 +12,9 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '<rootDir>[/\\\\](node_modules|src/migrations)[/\\\\]',
   ],
+  moduleNameMapper: {
+    ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
+  },
   globals: {
     'ts-jest': {
       tsConfig: {
