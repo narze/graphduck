@@ -6,7 +6,7 @@ import { User } from '../src/entities/user'
 const seed = async () => {
   const connection = await createConnection()
   await connection.dropDatabase()
-  await connection.synchronize(true)
+  await connection.runMigrations()
 
   await loadFixtures()
 }

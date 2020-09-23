@@ -37,6 +37,7 @@ touch src/entities/your_entity.ts
 1. Generate database migration file from TypeORM entities
 
 ```shell
+yarn db:migrate # Since generating migration diffs your current db state, so make sure your db is up-to-date
 yarn migration:generate -n YourMigrationName
 ```
 

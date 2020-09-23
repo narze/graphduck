@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  OneToMany,
+} from 'typeorm'
 import { Field, ID, ObjectType } from 'type-graphql'
+import { Book } from './book'
 
 @ObjectType()
 @Entity()
@@ -19,4 +26,7 @@ export class User extends BaseEntity {
   @Field({ nullable: true })
   @Column({ nullable: true })
   age?: number
+
+  @OneToMany(() => Book, (book) => book.owner)
+  books: Book[]
 }

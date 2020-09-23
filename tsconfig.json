@@ -23,5 +23,5 @@
     "baseUrl": "."
   },
   "exclude": ["node_modules", "src/migrations"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./test/**/*.ts"]
 }
