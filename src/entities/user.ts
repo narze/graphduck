@@ -27,6 +27,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   age?: number
 
+  // FIXME: Maybe this cause n+1 queries issue
   @Field(() => [Book])
   @OneToMany(() => Book, (book) => book.owner, { lazy: true })
   books: Promise<Book[]> | Book[]

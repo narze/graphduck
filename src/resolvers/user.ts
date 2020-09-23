@@ -31,6 +31,7 @@ export class UserResolver {
     return await user.save()
   }
 
+  // FIXME: Maybe this cause n+1 queries issue
   @FieldResolver(() => Int)
   async booksCount(@Root() user: User): Promise<number> {
     const books = await user.books
