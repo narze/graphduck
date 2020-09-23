@@ -1,10 +1,10 @@
 import { createTestClient } from 'apollo-server-testing'
 import { ApolloServer, gql } from 'apollo-server'
-import { User } from '../../entities/user'
-import { Book } from '../../entities/book'
+import { User } from '../../src/entities/user'
+import { Book } from '../../src/entities/book'
 import { getConnectionOptions, createConnection } from 'typeorm'
 import { buildSchema } from 'type-graphql'
-import { UserResolver } from '../user'
+import { UserResolver } from '../../src/resolvers/user'
 
 // TODO: Refactor server
 async function getServer() {
