@@ -29,5 +29,5 @@
     }
   },
   "exclude": ["node_modules", "src/migrations"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./test/**/*.ts"]
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./test/**/*.ts", "./scripts/*.ts"]
 }

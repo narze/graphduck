@@ -6,7 +6,7 @@
   "author": "Manassarn Manoonchai <manassarn@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --watch \"**/*.ts\" --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --watch \"**/*.ts\" --respawn --transpile-only src/index.ts",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "test": "jest",
     "test-all": "yarn lint && yarn type-check && yarn test --ci --coverage",
@@ -44,6 +44,7 @@
     "sqlite3": "^5.0.0",
     "ts-jest": "^26.4.0",
     "ts-node-dev": "^1.0.0-pre.63",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.0.3"
   },
   "dependencies": {
