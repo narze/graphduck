@@ -72,6 +72,7 @@ const GET_USER_WITH_ID_WITH_BOOKS = gql`
       books {
         name
       }
+      booksCount
     }
   }
 `
@@ -121,7 +122,7 @@ it('creates & retrieves users', async () => {
   await stop()
 })
 
-it('can resolves user with books', async () => {
+it('can resolves user with books & booksCount', async () => {
   const { server, stop } = await getServer()
 
   const user = User.create({ firstName: 'John', lastName: 'Doe' })
@@ -146,6 +147,7 @@ it('can resolves user with books', async () => {
   }
 
   expect(queryRes.data.user.books[0].name).toBe(book.name)
+  expect(queryRes.data.user.booksCount).toBe(1)
 
   await stop()
 })
