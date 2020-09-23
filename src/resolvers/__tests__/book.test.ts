@@ -1,6 +1,7 @@
 import { createTestClient } from 'apollo-server-testing'
 import { ApolloServer, gql } from 'apollo-server'
 import { Book } from '../../entities/book'
+import { User } from '../../entities/user'
 import { getConnectionOptions, createConnection } from 'typeorm'
 import { buildSchema } from 'type-graphql'
 import { BookResolver } from '../book'
@@ -11,7 +12,7 @@ async function getServer() {
 
   const db = await createConnection({
     ...defaultConnectionOptions,
-    entities: [Book],
+    entities: [Book, User],
   })
 
   const schema = await buildSchema({
