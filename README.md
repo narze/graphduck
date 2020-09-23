@@ -25,27 +25,27 @@ docker run -it --rm postgres:alpine psql -h host.docker.internal -U postgres -c 
 
 1. Create new Entity in `src/entities`
 
-```shell
-touch src/entities/your_entity.ts
-```
+    ```shell
+    touch src/entities/your_entity.ts
+    ```
 
 1. Create & export entity class
 
-- Use TypeORM decorators to define column eg. `@Column`, `@PrimaryGeneratedColumn`
-- Use TypeGraphQL decorators to define field eg. `@Field`
+  - Use TypeORM decorators to define column eg. `@Column`, `@PrimaryGeneratedColumn`
+  - Use TypeGraphQL decorators to define field eg. `@Field`
 
 1. Generate database migration file from TypeORM entities
 
-```shell
-yarn db:migrate # Since generating migration diffs your current db state, so make sure your db is up-to-date
-yarn migration:generate -n YourMigrationName
-```
+    ```shell
+    yarn db:migrate # Since generating migration diffs your current db state, so make sure your db is up-to-date
+    yarn migration:generate -n YourMigrationName
+    ```
 
 1. Check your generated migration file, then apply the migration
 
-```shell
-yarn db:migrate
-```
+    ```shell
+    yarn db:migrate
+    ```
 
 ### Adding new Resolver
 
@@ -57,8 +57,8 @@ yarn db:migrate
 
 1. Create your intended query / mutation in test file, then run test once
 
-```shell
-yarn test # or yarn test --watch
-```
+    ```shell
+    yarn test # or yarn test --watch
+    ```
 
 1. Implement the query / mutation, until the test passes, then refactor
