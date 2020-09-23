@@ -31,8 +31,8 @@ docker run -it --rm postgres:alpine psql -h host.docker.internal -U postgres -c 
 
 1. Create & export entity class
 
-  - Use TypeORM decorators to define column eg. `@Column`, `@PrimaryGeneratedColumn`
-  - Use TypeGraphQL decorators to define field eg. `@Field`
+    - Use TypeORM decorators to define column eg. `@Column`, `@PrimaryGeneratedColumn`
+    - Use TypeGraphQL decorators to define field eg. `@Field`
 
 1. Generate database migration file from TypeORM entities
 
