@@ -8,6 +8,13 @@ GraphQL server stack made with Apollo Server 2, TypeORM, TypeGraphQL, and more.
 
 - Install Node.js (v12 / v14)
 - Create Postgres Database with name `graphduck_dev`
+
+```shell
+psql -h localhost -U postgres -c 'CREATE DATABASE graphduck_dev;'
+# or using Docker
+docker run -it --rm postgres:alpine psql -h host.docker.internal -U postgres -c 'CREATE DATABASE graphduck_dev;'
+```
+
 - `yarn install`
 - `yarn db:migrate`
 - `yarn dev`
