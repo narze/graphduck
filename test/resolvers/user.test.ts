@@ -62,7 +62,21 @@ const CREATE_USER = gql`
   }
 `
 
-it('fetches single launch', async () => {
+const GET_USER_WITH_ID_WITH_BOOKS = gql`
+  query($id: Int!) {
+    user(id: $id) {
+      id
+      age
+      firstName
+      lastName
+      books {
+        name
+      }
+    }
+  }
+`
+
+it('creates & retrieves users', async () => {
   const { server, stop } = await getServer()
 
   const { mutate, query } = createTestClient(server)
@@ -94,13 +108,44 @@ it('fetches single launch', async () => {
 
   const getUserRes = await query({
     query: GET_USER_WITH_ID,
-    variables: { id: +mutateRes.data.createUser.id },
+    variables: { id: +queryRes.data.users[0].id },
   })
 
   if (!getUserRes.data) {
     console.error(getUserRes)
     throw new Error('query error')
   }
+
+  expect(getUserRes.data.user.id).toBe(queryRes.data.users[0].id)
+
+  await stop()
+})
+
+it('can resolves user with books', async () => {
+  const { server, stop } = await getServer()
+
+  const user = User.create({ firstName: 'John', lastName: 'Doe' })
+  await user.save()
+
+  const book = Book.create({
+    owner: user,
+    name: 'Harry Potter',
+  })
+  await book.save()
+
+  const { query } = createTestClient(server)
+
+  const queryRes = await query({
+    query: GET_USER_WITH_ID_WITH_BOOKS,
+    variables: { id: user.id },
+  })
+
+  if (!queryRes.data) {
+    console.error(queryRes)
+    throw new Error('query error')
+  }
+
+  expect(queryRes.data.user.books[0].name).toBe(book.name)
 
   await stop()
 })

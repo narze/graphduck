@@ -27,6 +27,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   age?: number
 
-  @OneToMany(() => Book, (book) => book.owner)
-  books: Book[]
+  @Field(() => [Book])
+  @OneToMany(() => Book, (book) => book.owner, { lazy: true })
+  books: Promise<Book[]> | Book[]
 }
