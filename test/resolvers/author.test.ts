@@ -1,10 +1,10 @@
 import { createTestClient } from 'apollo-server-testing'
 import { ApolloServer, gql } from 'apollo-server'
-import { User } from '@/entities/user'
+import { Author } from '@/entities/author'
 import { Book } from '@/entities/book'
 import { getConnectionOptions, createConnection } from 'typeorm'
 import { buildSchema } from 'type-graphql'
-import { UserResolver } from '@/resolvers/user'
+import { AuthorResolver } from '@/resolvers/author'
 
 // TODO: Refactor server
 async function getServer() {
@@ -12,11 +12,11 @@ async function getServer() {
 
   const db = await createConnection({
     ...defaultConnectionOptions,
-    entities: [User, Book],
+    entities: [Author, Book],
   })
 
   const schema = await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [AuthorResolver],
   })
 
   const server = new ApolloServer({ schema })
@@ -31,7 +31,7 @@ async function getServer() {
 
 const GET_USERS = gql`
   query {
-    users {
+    authors {
       id
       age
       firstName
@@ -42,7 +42,7 @@ const GET_USERS = gql`
 
 const GET_USER_WITH_ID = gql`
   query($id: Int!) {
-    user(id: $id) {
+    author(id: $id) {
       id
       age
       firstName
@@ -53,7 +53,7 @@ const GET_USER_WITH_ID = gql`
 
 const CREATE_USER = gql`
   mutation {
-    createUser(firstName: "Foo", lastName: "Bar") {
+    createAuthor(firstName: "Foo", lastName: "Bar") {
       id
       age
       firstName
@@ -64,7 +64,7 @@ const CREATE_USER = gql`
 
 const GET_USER_WITH_ID_WITH_BOOKS = gql`
   query($id: Int!) {
-    user(id: $id) {
+    author(id: $id) {
       id
       age
       firstName
@@ -77,7 +77,7 @@ const GET_USER_WITH_ID_WITH_BOOKS = gql`
   }
 `
 
-it('creates & retrieves users', async () => {
+it('creates & retrieves authors', async () => {
   const { server, stop } = await getServer()
 
   const { mutate, query } = createTestClient(server)
@@ -92,9 +92,9 @@ it('creates & retrieves users', async () => {
     throw new Error('mutation error')
   }
 
-  expect(mutateRes.data.createUser.age).toBe(null)
-  expect(mutateRes.data.createUser.firstName).toBe('Foo')
-  expect(mutateRes.data.createUser.lastName).toBe('Bar')
+  expect(mutateRes.data.createAuthor.age).toBe(null)
+  expect(mutateRes.data.createAuthor.firstName).toBe('Foo')
+  expect(mutateRes.data.createAuthor.lastName).toBe('Bar')
   // expect(mutateRes.data).toMatchInlineSnapshot();
 
   const queryRes = await query({ query: GET_USERS })
@@ -103,33 +103,33 @@ it('creates & retrieves users', async () => {
     throw new Error('query error')
   }
 
-  expect(queryRes.data.users).toBeInstanceOf(Array)
-  expect(queryRes.data.users.length).toBe(1)
+  expect(queryRes.data.authors).toBeInstanceOf(Array)
+  expect(queryRes.data.authors.length).toBe(1)
   // expect(queryRes.data).toMatchInlineSnapshot();
 
-  const getUserRes = await query({
+  const getAuthorRes = await query({
     query: GET_USER_WITH_ID,
-    variables: { id: +queryRes.data.users[0].id },
+    variables: { id: +queryRes.data.authors[0].id },
   })
 
-  if (!getUserRes.data) {
-    console.error(getUserRes)
+  if (!getAuthorRes.data) {
+    console.error(getAuthorRes)
     throw new Error('query error')
   }
 
-  expect(getUserRes.data.user.id).toBe(queryRes.data.users[0].id)
+  expect(getAuthorRes.data.author.id).toBe(queryRes.data.authors[0].id)
 
   await stop()
 })
 
-it('can resolves user with books & booksCount', async () => {
+it('can resolves author with books & booksCount', async () => {
   const { server, stop } = await getServer()
 
-  const user = User.create({ firstName: 'John', lastName: 'Doe' })
-  await user.save()
+  const author = Author.create({ firstName: 'John', lastName: 'Doe' })
+  await author.save()
 
   const book = Book.create({
-    owner: user,
+    owner: author,
     name: 'Harry Potter',
   })
   await book.save()
@@ -138,7 +138,7 @@ it('can resolves user with books & booksCount', async () => {
 
   const queryRes = await query({
     query: GET_USER_WITH_ID_WITH_BOOKS,
-    variables: { id: user.id },
+    variables: { id: author.id },
   })
 
   if (!queryRes.data) {
@@ -146,8 +146,8 @@ it('can resolves user with books & booksCount', async () => {
     throw new Error('query error')
   }
 
-  expect(queryRes.data.user.books[0].name).toBe(book.name)
-  expect(queryRes.data.user.booksCount).toBe(1)
+  expect(queryRes.data.author.books[0].name).toBe(book.name)
+  expect(queryRes.data.author.booksCount).toBe(1)
 
   await stop()
 })

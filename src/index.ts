@@ -1,11 +1,11 @@
 import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { createConnection, getConnectionOptions } from 'typeorm'
-import { User } from '@/entities/user'
+import { Author } from '@/entities/author'
 import { Book } from '@/entities/book'
 import { buildSchema } from 'type-graphql'
 import { HelloResolver } from '@/resolvers/hello'
-import { UserResolver } from '@/resolvers/user'
+import { AuthorResolver } from '@/resolvers/author'
 import { BookResolver } from '@/resolvers/book'
 
 const main = async () => {
@@ -14,13 +14,13 @@ const main = async () => {
   // TODO: auto include all entities & resolvers
   const conn = await createConnection({
     ...defaultConnectionOptions,
-    entities: [User, Book],
+    entities: [Author, Book],
   })
 
   await conn.synchronize()
 
   const schema = await buildSchema({
-    resolvers: [HelloResolver, UserResolver, BookResolver],
+    resolvers: [HelloResolver, AuthorResolver, BookResolver],
   })
 
   const server = new ApolloServer({ schema })

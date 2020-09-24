@@ -1,4 +1,4 @@
-import { User } from '@/entities/user'
+import { Author } from '@/entities/author'
 import { Book } from '@/entities/book'
 import { getConnectionOptions, createConnection } from 'typeorm'
 
@@ -8,7 +8,7 @@ async function initDb() {
 
   const db = await createConnection({
     ...defaultConnectionOptions,
-    entities: [User, Book],
+    entities: [Author, Book],
   })
 
   return {
@@ -29,20 +29,20 @@ it('creates & retrieves books', async () => {
   await stop()
 })
 
-it('belongs to owner (user)', async () => {
+it('belongs to owner (author)', async () => {
   const { stop } = await initDb()
 
-  const user = User.create({ firstName: 'John', lastName: 'Doe' })
-  await user.save()
+  const author = Author.create({ firstName: 'John', lastName: 'Doe' })
+  await author.save()
 
   const book = Book.create({
-    owner: user,
+    owner: author,
     name: 'Harry Potter',
   })
   await book.save()
 
-  expect(book.owner.id).toBe(user.id)
-  expect(book.owner.firstName).toBe(user.firstName)
+  expect(book.owner.id).toBe(author.id)
+  expect(book.owner.firstName).toBe(author.firstName)
 
   await stop()
 })

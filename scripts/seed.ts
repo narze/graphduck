@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 
 import { createConnection } from 'typeorm'
-import { User } from '@/entities/user'
+import { Author } from '@/entities/author'
 
 const seed = async () => {
   const connection = await createConnection()
@@ -12,7 +12,7 @@ const seed = async () => {
 }
 
 const loadFixtures = async () => {
-  const users = [
+  const authors = [
     {
       firstName: 'John',
       lastName: 'Doe',
@@ -26,11 +26,11 @@ const loadFixtures = async () => {
   ]
 
   await Promise.all(
-    users.map(async ({ firstName, lastName, age }) => {
-      await User.create({ firstName, lastName, age }).save()
+    authors.map(async ({ firstName, lastName, age }) => {
+      await Author.create({ firstName, lastName, age }).save()
 
       // eslint-disable-next-line no-console
-      console.info(`Created user ${firstName} ${lastName} with age ${age}`)
+      console.info(`Created author ${firstName} ${lastName} with age ${age}`)
     })
   )
 }

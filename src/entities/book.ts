@@ -6,7 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm'
 import { Field, ObjectType } from 'type-graphql'
-import { User } from './user'
+import { Author } from './author'
 
 @ObjectType()
 @Entity()
@@ -18,6 +18,6 @@ export class Book extends BaseEntity {
   @Column()
   name: string
 
-  @ManyToOne(() => User, (user) => user.books)
-  owner: User
+  @ManyToOne(() => Author, (author) => author.books)
+  owner: Author
 }

@@ -10,7 +10,7 @@ import { Book } from './book'
 
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export class Author extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   readonly id: number
