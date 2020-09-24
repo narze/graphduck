@@ -15,7 +15,7 @@
     "type-check": "tsc --pretty --noEmit",
     "migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate",
     "db:migrate": "ts-node ./node_modules/.bin/typeorm migration:run",
-    "db:seed": "NODE_ENV=development ts-node scripts/seed.ts"
+    "db:seed": "NODE_ENV=development ts-node -r tsconfig-paths/register scripts/seed.ts"
   },
   "husky": {
     "hooks": {
